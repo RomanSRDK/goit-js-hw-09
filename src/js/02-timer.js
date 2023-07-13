@@ -11,7 +11,6 @@ const choosenDateEl = document.querySelector('#datetime-picker');
 // const hourRefEl = document.querySelector('[data-hours]');
 // const minuteRefEl = document.querySelector('[data-minutes]');
 // const secondRefEl = document.querySelector('[data-seconds]');
-const timerEl = document.querySelectorAll('div.field span.value');
 
 let timer = null;
 startBtnEl.disabled = true;
@@ -42,11 +41,16 @@ const options = {
 
           const data = convertMs(timeLeft);
 
-          // dayRefEl.textContent = addLeadingZero(data.days);
+          for (const element in data) {
+            const value = data[element];
+            document.querySelector(`[data-${element}]`).textContent =
+              addLeadingZero(value);
+          }
+
+          // document.querySelector('[data-days]').textContent = addLeadingZero(data['days']);
           // hourRefEl.textContent = addLeadingZero(data.hours);
           // minuteRefEl.textContent = addLeadingZero(data.minutes);
           // secondRefEl.textContent = addLeadingZero(data.seconds);
-          timerEl.textContent = addLeadingZero(dataset);
 
           if (timeLeft <= 1000) {
             spansEl.forEach(item => item.classList.toggle('end'));
